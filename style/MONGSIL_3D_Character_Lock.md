@@ -601,6 +601,35 @@ Do NOT expose pads when anatomy/perspective would naturally hide them.
 
 ---
 
+## PAD SPECIFICATION (approved 2026-10-01)
+
+FRONT PAW PALM (`references/3d/MONGSIL_3D_Paw_Inner.png`):
+
+- 3 round toe pads on top, arranged in an arch, the middle pad highest
+- 1 wide horizontal bean-shaped main pad below them
+- TOTAL: 4 pads
+
+HIND FOOT SOLE (`references/3d/MONGSIL_3D_Foot_Sole.png`):
+
+- 3 round toe pads at the toe end
+- 1 vertically elongated egg-shaped main pad toward the heel
+- TOTAL: 4 pads
+
+All pads:
+
+- soft light peach color
+- slightly raised above the fur
+- only on the inner surface (palm / sole)
+- NO pads on the outer surface (back of paw, top of foot)
+
+NEVER:
+
+- add pads (no 4th or 5th toe pad)
+- omit pads
+- swap the positions of the toe pads and the main pad
+
+---
+
 # 14 — TAIL — STRICT SHAPE LOCK
 
 MONGSIL's tail is a permanent signature feature.
