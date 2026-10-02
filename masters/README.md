@@ -6,7 +6,7 @@
 - 해당 포즈를 수정하거나 다시 만들 때는 **반드시 이 마스터에서 시작**한다.
 - 이전 생성 결과(job)를 편집 기준으로 다시 넣지 않는다. 재생성을 반복하면 화질 & 디테일이 열화된다.
 
-## MONGSIL_3D_Jump_APPROVED_MASTER.webp (2026-10-02 승인)
+## MONGSIL_3D_Jump_APPROVED_MASTER.png (2026-10-02 승인)
 
 3D 몽실이 정면 점프. 양팔을 위로 들고 눈을 감고 입을 벌려 웃는 표정. 웜화이트 배경 & 바닥 그림자.
 
@@ -19,7 +19,11 @@
 
 ### 파일 상태 (중요)
 
-- `MONGSIL_3D_Jump_APPROVED_MASTER.webp`는 채팅 첨부본 압축 사본(webp, 약 160KB)이다. **위치 확인용 참고본이며 제작용 MASTER로 쓰지 않는다.**
-- 제작용 원본(FULL-RESOLUTION ORIGINAL)은 아직 repo에 없다. 채팅 첨부는 webp로 변환돼 들어오므로 원본 바이트를 받을 수 없다.
-- 원본은 사용자가 GitHub 웹 업로드로 `masters/`에 직접 올리거나, Higgsfield 업로드 위젯으로 올려 media_id를 받는다. 받으면 이 문서에 파일명 & 해상도 & 용량 & media_id를 적는다.
-- Higgsfield 작업은 원본 media_id에서 시작한다. 이 webp 사본이나 이전 생성물(job)을 기준 이미지로 넣지 않는다.
+- **제작용 MASTER = `MONGSIL_3D_Jump_APPROVED_MASTER.png`** (사용자 원본 업로드, 변환 없음)
+  - 형식: PNG, 8-bit RGBA, non-interlaced
+  - 해상도: 2883 × 2883
+  - 용량: 5,230,856 bytes (약 5.0MB)
+  - SHA-256: `5218c541aede381ac94f0bc2289c7f036742dcd57290916576a6725295daafda`
+- `MONGSIL_3D_Jump_APPROVED_MASTER.webp`는 채팅 첨부 압축 사본(약 160KB)이다. **제작용에서 제외.** 쓰지 않는다.
+- Higgsfield 작업은 이 PNG 원본을 업로드한 media_id에서 시작한다. webp 사본이나 이전 생성물(job)을 기준 이미지로 넣지 않는다.
+- PNG를 리사이즈 & 재압축 & 색상 보정 & 재렌더링하지 않는다. 사용자 승인 없이 덮어쓰지 않는다.
