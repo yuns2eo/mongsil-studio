@@ -9,6 +9,8 @@
 ## 저장소 구조
 
 ```
+CLAUDE.md                      Claude Code용 실행 규칙 (폴더를 열면 자동 로드)
+.mcp.json                      Higgsfield MCP 연결 설정
 character/
   MONGSIL_Character_Lock.md    범용 캐릭터 아이덴티티 락 (항상 적용)
 styles/
@@ -63,7 +65,10 @@ references/
 
 - 이미지 생성 모델은 **GPT Image 2**를 사용합니다. Nano Banana 계열은 원본과 다르게 나와서 쓰지 않습니다.
 - Higgsfield에서는 엘리먼트 `@몽실3D_통합`(정면, 45도, 측면, 후면 4장 묶음)을 불러옵니다.
+  - 단, 생성 시 실제로 주입되는 이미지는 엘리먼트의 **첫 장(정면)뿐**입니다. (2026-10-19 생성 기록으로 확인)
+  - 정면이 아닌 구도는 `references/3d/`의 해당 각도 이미지를 참조 이미지로 함께 첨부합니다.
   - 손바닥 & 발바닥 디테일이 필요하면 `@mongsil_3d_paw_front_v1`, `@mongsil_3d_paw_hind_v1`을 함께 씁니다.
+- GPT Image 2 기본값은 1K & low 화질입니다. 시안 확인은 기본값, 실사용 컷은 화질을 올려서 생성합니다.
 
 ---
 
