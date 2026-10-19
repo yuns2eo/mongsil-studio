@@ -20,7 +20,14 @@ references/
     Front.png / Left_3Q.png / Left_Profile.png / Back.png   4방향 턴어라운드
     Paw_Front.png / Paw_Hind.png                            앞발 패드 & 뒷발 발바닥
     Tongue.png / Sit.png                                    승인된 표정 & 포즈
+templates/
+  mongsil-scene.md             장면 프롬프트 골격 (시선 & 몸 방향, 앞발 & 소품, 공통 Negative)
+prompts/
+  README.md                    생성 기록 형식 & 상태 값
+  YYYY-MM-DD-슬러그.md         실제 생성 기록 (승인 & 미확인 & 실패)
 ```
+
+Claude Code에서는 `CLAUDE.md`가 Element 선택, 생성 설정, 기록 방법까지 정합니다. 그 외 AI는 이 README 순서대로 작업하고 `templates/mongsil-scene.md` 골격으로 프롬프트를 씁니다.
 
 ---
 
