@@ -1,79 +1,125 @@
 # mongsil-studio
 
-몽실이(MONGSIL) 캐릭터 이미지를 **언제 생성하든 같은 캐릭터로** 유지하기 위한 작업 기준 저장소입니다.
+몽실(MONGSIL) 캐릭터 이미지를 **언제 생성하든 동일한 캐릭터로** 유지하기 위한 작업 기준 저장소입니다.
 
-AI(Claude, ChatGPT, Codex 등)가 이 저장소의 규칙과 레퍼런스를 읽고 몽실이 작업을 합니다.
-
-- Claude Code: 폴더를 열면 `CLAUDE.md`가 자동으로 로드됩니다.
-- Codex: `AGENTS.md`를 읽습니다.
-- 그 외 AI: 이 저장소의 락 파일과 레퍼런스 이미지를 첨부해서 요청합니다.
+이 README는 AI(Claude / ChatGPT 등)가 읽는 작업 지침서입니다. 몽실 이미지 요청을 받으면 아래 순서를 그대로 따르세요.
 
 ---
 
-## 구조
+## 저장소 구조
 
 ```
-CLAUDE.md                         Claude Code 규칙 & Higgsfield 엘리먼트 목록
-AGENTS.md                         기본 운영 규칙 (모든 AI 공통)
-style/
-  MONGSIL_Character_Lock.md       2D 라인 아이덴티티 락 v2
-  MONGSIL_3D_Character_Lock.md    3D 라인 아이덴티티 락
-templates/
-  MONGSIL_Scene.md                새 장면 생성 템플릿
-  MONGSIL_Edit.md                 기존 이미지 편집 템플릿
+character/
+  MONGSIL_Character_Lock.md    범용 캐릭터 아이덴티티 락 (항상 적용)
+styles/
+  MONGSIL_3D_Felt.md           3D 펠트 렌더 스타일
 references/
-  MONGSIL_Front / Left_3Q / Left_Profile / Back.png   2D 턴어라운드
-  MONGSIL_Paw_Inner / Foot_Sole / Tail.png            2D 상세
-  poses/                                              2D 승인 포즈
-  3d/
-    MONGSIL_3D_Front / Left_3Q / Left_Profile / Back.png   3D 턴어라운드
-    MONGSIL_3D_Paw_Inner / Foot_Sole.png                   3D 상세
-    MONGSIL_3D_Tongue / Sit.png                            3D 승인 포즈
-prompts/                          검증된 프롬프트 & 실패 기록
-mongsil.py                        자연어 요청 → 레퍼런스 선택 & 프롬프트 CLI
-.mcp.json                         Higgsfield MCP 자동 연결
+  3d/                          3D 레퍼런스
+    Front.png / Left_3Q.png / Left_Profile.png / Back.png   4방향 턴어라운드
+    Paw_Front.png / Paw_Hind.png                            앞발 패드 & 뒷발 발바닥
+    Tongue.png / Sit.png                                    승인된 표정 & 포즈
 ```
 
-## 3D 원본과 Figma 레이어 대응
+---
 
-| 파일 | Figma 레이어 |
+## 작업 순서
+
+### 1. 아이덴티티 락 로드 (필수, 예외 없음)
+
+모든 몽실 이미지 요청은 `character/MONGSIL_Character_Lock.md`를 먼저 읽는 것으로 시작합니다.
+의상, 소품, 계절, 장소, 장르와 무관하게 항상 적용됩니다.
+
+### 2. 스타일 파일 판단
+
+| 요청 | 적용 파일 |
 |---|---|
-| MONGSIL_3D_Front.png | 몽실_정면 |
-| MONGSIL_3D_Left_3Q.png | 몽실_45도 |
-| MONGSIL_3D_Left_Profile.png | 몽실_측면 |
-| MONGSIL_3D_Back.png | 몽실_후면 |
-| MONGSIL_3D_Paw_Inner.png | 몽실_앞발 |
-| MONGSIL_3D_Foot_Sole.png | 몽실_뒷발 |
-| MONGSIL_3D_Tongue.png | 몽실_메롱 |
-| MONGSIL_3D_Sit.png | 몽실_앉기 |
+| 3D, 입체, 피규어, 인형, 별도 언급 없음 | `styles/MONGSIL_3D_Felt.md` |
+| 2D, 일러스트, 스티커, 이모티콘, 플랫 | 아직 없음. 사용자에게 먼저 물어볼 것 |
+
+### 3. 레퍼런스 이미지 첨부
+
+요청한 카메라 앵글에 맞는 이미지를 첨부합니다.
+
+| 앵글 | 파일 |
+|---|---|
+| 정면 | `Front.png` |
+| 좌측 3/4 | `Left_3Q.png` |
+| 좌측 측면 | `Left_Profile.png` |
+| 뒷모습 | `Back.png` |
+| 손바닥이 보이는 장면 (손 흔들기, 하이파이브, 물건 들기) | `Paw_Front.png` 추가 |
+| 발바닥이 보이는 장면 (앉기, 점프, 뛰기) | `Paw_Hind.png` 추가 |
+
+- 앵글이 명시되지 않았으면 `Front.png` + `Left_3Q.png` 두 장을 첨부합니다.
+- `Tongue.png`, `Sit.png`는 비슷한 표정이나 포즈를 요청할 때만 추가합니다.
+
+### 4. 씬 요소 작성
+
+락 파일이 고정하지 않는 부분만 자유롭게 구성합니다.
+의상, 소품, 포즈, 행동, 표정, 장소, 계절, 날씨, 조명, 분위기, 카메라 거리 & 앵글.
+
+---
+
+## 생성 도구
+
+- 이미지 생성 모델은 **GPT Image 2**를 사용합니다. Nano Banana 계열은 원본과 다르게 나와서 쓰지 않습니다.
+- Higgsfield에서는 엘리먼트 `@몽실3D_통합`(정면, 45도, 측면, 후면 4장 묶음)을 불러옵니다.
+  - 손바닥 & 발바닥 디테일이 필요하면 `@mongsil_3d_paw_front_v1`, `@mongsil_3d_paw_hind_v1`을 함께 씁니다.
+
+---
 
 ## 우선순위
 
-충돌하면 위쪽이 이깁니다.
+충돌이 생기면 위쪽이 항상 이깁니다.
 
-1. 공식 레퍼런스 이미지
-2. 락 파일 (2D 또는 3D)
-3. 사용자의 자세 & 장면 요청
-4. 소품 & 배경
+1. 승인된 3D 레퍼런스 이미지 (`references/3d/`)
+2. `character/MONGSIL_Character_Lock.md`
+3. `styles/` 스타일 파일
+4. `looks/` 룩 파일 (추가될 경우)
+5. 사용자의 씬 요청 (환경, 조명, 분위기 등)
 
-## 사용법
+씬 요청이 캐릭터 정체성과 충돌하면 **정체성을 지키고**, 무엇을 조정했는지 사용자에게 알립니다.
+레퍼런스에서 보이지 않는 디테일은 추측해서 채우지 않고, 가장 가까운 레퍼런스를 따르거나 사용자에게 확인합니다.
 
-```
-git clone <이 저장소>
-cd mongsil-studio
-claude
-```
+---
 
-그다음 한국어로 요청합니다.
+## 생성 후 검수
 
-```
-3D 몽실이가 걷는 모습 프롬프트 만들어줘
-2D 몽실이 누워있는 자세, 흰 배경
-```
+결과를 넘기기 전에 가장 가까운 레퍼런스와 비교하고, 아래 중 하나라도 해당하면 다시 생성합니다.
+자세한 기준은 락 파일 9번 항목을 따릅니다.
 
-## 규칙
+- 측면에서 아래 얼굴이 뾰족한 세모가 됨
+- 머리가 완전한 구나 세로로 긴 타원이 됨 (살짝 가로로 넓은 타원이어야 함)
+- 정면 기준 화면 오른쪽 귀의 갈색 물결 무늬가 없어지거나 단순해지거나 반전됨
+- 배 패치가 원이나 가로 타원이 됨 (가운데의 살짝 세로로 긴 타원이어야 함)
+- 수염이 얼굴에 그려진 선처럼 박혀 있음 (볼에서 공중으로 뻗어 나와야 함)
+- 색 코드가 바뀌거나, 확인되지 않은 핑크에 `#FFCDB4`를 임의로 씀
 
-- 작업 시작 전 `git pull`
-- 결과가 틀려서 고쳤으면 `prompts/`에 기록하고 커밋 & 푸시
-- `references/`와 `style/`은 승인 없이 수정하지 않기
-- 이 저장소는 **Private**로 유지
+---
+
+## 금지 사항
+
+- 락 파일 내용을 임의로 해석, 완화, 생략하지 않습니다.
+- 씬 분위기에 맞춰 캐릭터를 리디자인하지 않습니다. 몽실은 배경이 바뀌어도 같은 몽실입니다.
+- 무늬 위치를 뒤집지 않습니다. 갈색 물결 무늬는 몽실 기준 **왼쪽** 귀 & 머리(정면에서 화면 오른쪽)에 있습니다.
+- 락 파일(`character/`, `styles/`, `looks/`)은 사용자가 명시적으로 요청할 때만 수정합니다.
+
+---
+
+## 확장 방법
+
+### 새 스타일 추가 (예: 2D 플랫)
+
+1. `styles/MONGSIL_{이름}.md` 생성
+   - 상단에 "`MONGSIL_Character_Lock.md`를 먼저 읽을 것, 락 파일이 상위 우선순위" 명시
+   - 재질, 선, 채색, 조명 같은 렌더 방식만 정의. 형태, 얼굴, 색, 무늬는 건드리지 않음
+2. `references/{이름}/`에 4방향 레퍼런스 이미지 추가
+3. 이 README의 구조와 스타일 판단 표에 항목 추가
+
+### 새 룩 추가 (예: 산타, 잠옷, 트렌치코트)
+
+1. `looks/MONGSIL_{이름}_Look.md` 생성
+   - 상단에 락 파일 우선 명시
+   - 탈착 가능한 요소만 정의 (의상, 소품). 얼굴, 비율, 무늬, 귀, 꼬리는 건드리지 않음
+   - 이 룩을 쓰지 말아야 할 상황도 함께 기재
+2. `references/{스타일}_{이름}/`에 4방향 레퍼런스 이미지 추가
+3. 이 README에 룩 판단 표 추가
