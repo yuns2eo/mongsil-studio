@@ -74,7 +74,10 @@ Soft flocked felt 3D mascot figure with a very short, dense, even matte pile. So
 4. The belly patch is centred and a slight vertical oval, following the body surface — not a circle, not a button.
 5. Whiskers grow from the cheeks and stand out in space — not printed, engraved, or pressed into the face.
 6. Colours stay literal: brown #B79571, inner ears #FFCDB4, features #000000. No other pink is set to #FFCDB4 by assumption.
-{7~. 이번 장면 고유 조건 — 소품 방향, 시선 대상, 앞발 접촉 등}
+7. The body stays chubby and round; arms and legs stay as short as the reference in every pose, and raised arms never press against the face.
+8. Brown appears only on the ear wave marking, the half-cloud marking on the outer tail-side upper arm (only when that outer side is visible), and the tail. No other spots on the body.
+9. Any palm or sole facing the viewer shows its pink pads (one large pad and four small toe pads).
+{10~. 이번 장면 고유 조건 — 소품 방향, 시선 대상, 앞발 접촉, 앞 물체 깊이 등}
 
 ## Negative
 {공통 Negative} + {장면 고유 Negative}
@@ -101,6 +104,7 @@ Soft flocked felt 3D mascot figure with a very short, dense, even matte pile. So
 
 - 소품은 반드시 앞발에 **닿아 있게** 쓴다. 떠 있거나 몸에 붙어 있으면 안 된다.
 - 소품이 배 패치를 다 가리면 4번 검증을 할 수 없다. 가려도 되는 장면이 아니면 "held low enough that part of the belly patch stays visible"을 넣는다.
+- 손바닥이 카메라를 향하는 자세(손 흔들기, 하이파이브, 만세)는 **사용자가 따로 말하지 않아도** 손바닥 패드 문장을 넣는다: `the palm facing the viewer has soft pink paw pads: one large central pad and four small round toe pads above it`. 이 문장을 빼먹어 패드 없이 나온 사례가 있다 (`prompts/2026-10-22-staged-scenes.md`, 택배기사).
 - 손바닥 젤리가 보여야 하면 `@mongsil_3d_paw_front_v1`을, 발바닥이면 `@mongsil_3d_paw_hind_v1`을 소품 Element로 추가한다. 단, 앞발 젤리 개수는 Element & 숫자 지정 & Negative로도 보장되지 않았다 (실측 3회). 젤리가 중요한 컷이면 생성 전에 이 한계를 사용자에게 알린다.
 
 ## 5. 소품 형태 & 방향 유지
@@ -115,7 +119,48 @@ Soft flocked felt 3D mascot figure with a very short, dense, even matte pile. So
 - 몽실 Element는 **1개만** 쓴다. 같은 캐릭터 Element를 여러 개 넣으면 여러 마리로 나온다.
 - 몽실 1개 + 소품 Element 추가는 다중 캐릭터 문제를 만들지 않았다 (실측 2회).
 - `@몽실3D_통합`은 정면 한 장만 주입된다. 정면이 아닌 구도는 `references/3d/`의 해당 각도 이미지를 `medias`로 함께 넣는다.
-- 기존 결과를 고칠 때는 새로 생성하지 말고 그 결과를 편집 기준 이미지로 넣는다. 정체성 & 배경 & 질감이 잘 유지됐다 (실측 4회).
+- 기존 결과를 고칠 때 그 결과를 편집 기준 이미지로 넣는 건 **1회까지만** 한다. 1회 편집은 정체성 & 배경 & 질감이 잘 유지됐다 (실측 4회).
+- 같은 결과를 2회 이상 이어서 편집하면 화질이 깨지고 형태가 틀어진다. 두 번째 수정부터는 원본 레퍼런스로 **새로 생성**하고, 작은 경계 & 이음새 정리는 생성하지 말고 Figma에서 처리한다 (`prompts/2026-10-22-staged-scenes.md`, 만세 & 수의사 장면 2건).
+
+---
+
+## 7. 단계별 생성 (기본 순서)
+
+한 프롬프트에 의상 & 소품 & 장면 & 행동을 다 넣으면 얼굴과 비율이 쉽게 흐트러진다. 몽실이 장면은 항상 아래 순서로 만든다.
+
+| 단계 | 하는 일 | 배경 |
+|---|---|---|
+| 0. 분리 | 고정할 것(몽실 정체성, 레이아웃, 브랜드 컬러)과 바뀌는 것(의상, 소품, 자세, 장소)을 먼저 나눈다 | |
+| STEP 1 의상 & 소품 | 의상과 소품만 입힌 몽실이를 만들어 캐릭터 규칙부터 확인한다 | 단색 `#E4DFE3` |
+| STEP 2 장면 & 행동 | STEP 1 결과를 `medias` 참조로 넣고 행동과 앞쪽 물체를 더한다 | 누끼용 단색, 또는 장면 배경 |
+| STEP 3 분리 & 합성 | 캐릭터 누끼와 배경을 따로 만들어 Figma에서 규격별로 배치한다 | |
+| (선택) 모션 | 확정된 장면 이미지를 시작 프레임으로 짧은 모션을 만든다 | |
+
+- 각 단계 결과를 사용자에게 보여주고 다음 단계로 넘어간다. 단계를 건너뛰지 않는다.
+- STEP 1이 실패하면 STEP 2로 넘기지 않고 STEP 1을 새로 생성한다.
+
+### 앞에 물체가 있는 장면 (책상, 바구니, 상자)
+
+몽실이가 물체 뒤에 있어야 하면 아래 문장을 `## Critical conditions`에 넣는다. 넣지 않으면 상반신만 잘려서 물체 위에 올려진 것처럼 나온다 (수의사 장면 실측).
+
+```
+DEPTH: the {object} is IN FRONT of MONGSIL. MONGSIL stands BEHIND it; the {object} hides the lower body.
+MONGSIL does NOT sit or rest on top of the {object}; no body shadow on its top surface.
+```
+
+### 글자 & 로고
+
+- 배너 문구, 브랜드 로고, 상자 인쇄 마크는 생성하지 않는다. 생성하면 글자와 마크 모양이 틀어진다.
+- 소품은 로고 없이 생성하고, 문구와 로고는 Figma에서 원본 에셋으로 얹는다.
+- 위쪽에 문구가 들어갈 배너면 생성할 때 그 자리를 비워 둔다.
+
+### 팔 자세
+
+- 짧은 팔로 머리 위까지 드는 자세(상자 번쩍 들기 등)는 팔이 길어지거나 얼굴에 붙기 쉽다 (실측 1회). 가능하면 가슴 앞에서 끌어안기 & 한 팔에 끼기처럼 짧은 팔에 맞는 자세로 바꾼다.
+
+### 다른 AI(ChatGPT 등)용 프롬프트만 요청받을 때
+
+생성하지 않고 프롬프트만 준다. 이때도 `## Critical conditions`의 캐릭터 규칙(얼굴형, 짧은 팔다리, 무늬, 손바닥 & 발바닥 패드, 배 패치)을 빠짐없이 넣는다. 기존 이미지를 고치는 프롬프트면 바꿀 것만 번호로 나열하고 나머지는 "Keep EVERYTHING identical"로 고정한다.
 
 ---
 
@@ -128,7 +173,8 @@ vertically long head, mirrored markings, brown marking on the wrong ear, missing
 simplified round brown patch, circular belly patch, horizontal oval belly patch, raised button belly,
 whiskers printed on face, engraved whiskers, thick rigid whiskers, long fur, individual hairs,
 fabric seams, stitching, glossy plastic, vinyl shine, clay render, text, watermark, logo,
-cropped character, floating object
+cropped character, floating object, slim body, long arms, arms touching the face,
+extra brown spots on the body, heart-shaped arm marking, palm without paw pads
 ```
 
 ## 장면 고유 Negative 예시

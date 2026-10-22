@@ -19,6 +19,9 @@ Do not replace a visual reference with a guessed measurement, named shape, or in
 - Keep the mascot’s compact, padded silhouette. Do not apply realistic-cat anatomy, a human body, long limbs, fingers, or a slim/tall proportion.
 - The head is almost circular but **slightly wider than it is tall**. It is a broad, softly rounded horizontal oval—not a sphere, a vertically long oval, a pointed wedge, or a triangular face.
 - The head-to-body relationship is defined by the approved turnaround images. Do not use an unverified numeric ratio as a generation instruction.
+- The body is **chubby and round** in every scene. It never becomes slim, tall, or long-waisted, including under clothing.
+- Arms and legs stay as **short and stubby** as in the approved turnaround. A raised, reaching, waving, or hugging arm keeps exactly the same short length; a pose never lengthens a limb.
+- When both arms are raised (cheer / hands-up pose), they open outward in a V **away from the face**, with visible space between each arm and the head. Arms must not press against or cling to the sides of the face.
 
 ## 2. Head and face — highest-priority shape lock
 
@@ -47,9 +50,22 @@ All directions below use MONGSIL’s anatomical left/right. In the front view, M
 
 ### Other markings
 
-- Preserve the brown tail and any approved arm marking at their anatomical locations shown in the official reference.
+- Preserve the brown tail and the arm marking at their anatomical locations shown in the official reference.
 - Preserve the cloud-like tail silhouette from the official reference. Do not turn it into a thin, straight, striped, or differently shaped tail.
 - Do not add, duplicate, relocate, or mirror spots, stripes, or permanent accessories.
+
+### Arm marking
+
+- One small brown marking sits on the **outer side of the upper arm on the tail side** (screen right in the front view, the same side as the ear wave marking).
+- Its shape is a **cloud cut in half vertically**: a small half-cloud attached to the outer edge of the arm, with two or three soft bumps. It is not a heart, circle, dot, or stripe.
+- Show it when the outer or side face of that arm is visible (front, 45°, profile). Omit it when the inner side of the arm or the palm faces the viewer.
+- It stays on the upper arm edge. It never moves onto the waist, torso, or the other arm.
+- If the user asks to drop the arm marking for a specific scene or costume, follow that request for that scene and note it in the `prompts/` record. It does not change this lock.
+
+### Body has no other markings
+
+- Brown appears only in three places: the forehead-to-ear wave marking, the arm marking above, and the tail.
+- Apart from the belly patch, the body has **no markings at all**: no brown spots on the waist, sides, back, or legs.
 
 ## 4. Body and belly patch
 
@@ -57,6 +73,14 @@ All directions below use MONGSIL’s anatomical left/right. In the front view, M
 - The belly patch is centred on the belly and is a soft peach-pink **vertical oval**: its vertical dimension is slightly longer than its horizontal dimension.
 - It must follow the body surface naturally. It is neither a perfect circle, a horizontal oval, a button, a pocket, nor a separate raised object.
 - Preserve the reference’s placement and size relationship; do not compensate for a turned body by moving the patch off-centre.
+- When clothing or a prop would cover the belly, keep at least part of the patch visible (an open vest, a short top, a prop held low) unless the user accepts it being hidden. A result where the belly patch silently disappears is a failure.
+
+## 4-1. Paws: palm and sole pads
+
+- Whenever a **front paw palm faces the viewer** (waving, high-five, hands-up, showing something), it has soft pink pads: one large central pad and four small round toe pads above it.
+- Whenever a **hind paw sole is visible** (sitting, jumping, walking back foot), it has one large pad and four toe pads, matching the approved sitting reference.
+- The back of a paw is plain white with no pads.
+- Paws stay short rounded nubs with no fingers. Pad pink follows the approved reference; do not assume it equals `#FFCDB4`.
 
 ## 5. Whiskers: free-standing three-dimensional structure
 
@@ -99,6 +123,10 @@ Before delivery, compare against the closest official view and reject/regenerate
 5. **Embedded whiskers:** whiskers look painted/pressed into the face rather than naturally extending from the cheeks in space.
 6. **Palette drift/data loss:** any known HEX code is removed, renamed without the code, changed, or incorrectly applied to an unverified pink element.
 7. **Unverified specificity:** a count, ratio, contour, colour, or anatomical detail is stated or generated as certain despite not being visible in the relevant approved reference.
+8. **Wrong body or limbs:** slim body, long waist, or arms and legs longer than the turnaround; raised arms pressed against the face.
+9. **Wrong markings:** arm marking missing on a visible outer arm, wrong shape (heart, dot), on the wrong arm, or shown on an inner arm; any extra brown spot on the body.
+10. **Missing pads:** a palm or sole faces the viewer without its pink pads.
+11. **Hidden belly patch:** clothing or a prop covers the whole belly patch without the user accepting it.
 
 ## 10. Generation workflow
 
@@ -108,3 +136,5 @@ Before delivery, compare against the closest official view and reject/regenerate
 4. Generate without mirroring or redesigning locked features.
 5. Run the validation checklist above, paying special attention to profile shape, the screen-right ear wave in front view, belly-oval orientation, whisker depth, and literal HEX preservation.
 6. If a required detail is unverified, defer to the official reference or flag it; do not fill the gap with a guess.
+7. Build a scene in stages instead of one prompt: costume & prop first on a plain background, then scene & action, then cutout & layout. See `templates/mongsil-scene.md` section 7.
+8. Do not keep re-editing the same generated image. Each extra edit degrades quality and drifts the shape. Allow at most one edit of a result; after that, generate fresh from the approved references. Fix small edges and seams in the design tool instead of regenerating.
