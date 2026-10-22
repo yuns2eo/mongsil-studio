@@ -138,6 +138,7 @@ Soft flocked felt 3D mascot figure with a very short, dense, even matte pile. So
 
 - 각 단계 결과를 사용자에게 보여주고 다음 단계로 넘어간다. 단계를 건너뛰지 않는다.
 - STEP 1이 실패하면 STEP 2로 넘기지 않고 STEP 1을 새로 생성한다.
+- STEP 1 소품이 펫프 아이콘이나 펫용품이면 `CLAUDE.md`의 **펫프 아이콘 에셋** 표에서 Element를 넣는다. 모양 & 형태 & 각인은 에셋 그대로, 재질은 달라도 된다. 겹치는 사물은 어느 쪽을 쓸지 먼저 묻는다.
 
 ### 앞에 물체가 있는 장면 (책상, 바구니, 상자)
 
